@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DTX_main</title>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <style>
+        #phone {
+            width: 50%;
+        }
+
+        #email {
+            width: 70%;
+        }
+
+        .email {
+            margin-left: -70px;
+        }
+
+        .sex {
+            margin-left: 90px;
+        }
+
+        .birth {
+            margin-left: 60px;
+        }
+
+        .button3 {
+            margin-left: 50%;
+        }
+        .btn-sm{
+            width: 100px;
+        }
+
+        #navbar {
+            margin-top: 12px;
+            background-color: rgb(243, 243, 243);
+            padding-bottom: 10px;
+            height: 180px;
+        }
+
+        .table {
+            height: 10px;
+        }
+
+        .tr {
+            height: 20px;
+        }
+
+        .col-form-label {
+            margin-top: -15px;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div class="container-fluid"
+        style="height: 40px; width: 100%; background-color: rgba(13, 112, 241, 0.979); color:white;">
+        <h4><b>환자검색</b></h4>
+        <button class="btn" style="background-color:white; margin-top:-40px; float:right;" type="submit"><a href="{% url 'Login' %}">로그아웃</a></button>
+    </div>
+    <form action="{% url 'Counselor_CBT' %}" method="POST">
+        {% csrf_token %}
+        <nav class="container-fluid" id="navbar">
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <label class="col-form-label-sm"><b>이름</b></label>
+                </div>
+                <div class="col-auto">
+                    <input id="name" name="name" class="form-control form-control-sm">
+                </div>
+                <div class="col-auto birth">
+                    <label class="col-form-label-sm"><b>생년월일</b></label>
+                </div>
+                <div class="col-auto">
+                    <input type="date" id="birth" name="birth" class="form-control form-control-sm">
+                </div>
+                <div class="col-auto sex">
+                    <label class="col-form-label-sm"><b>성별</b></label>
+                </div>
+                <div class="col-auto">
+                    <select class="form-control form-control-sm" name="sex" title="성별 선택">
+                        <option value="">--선택--</option>
+                        <option value="male">남</option>
+                        <option value="female">여</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row g-3 align-items-center e_mail" style="margin-top: -20px;">
+                <div class="col-auto">
+                    <label class="col-form-label-sm"><b>연락처</b></label>
+                </div>
+                <div class="col-auto">
+                    <input type="text" id="phone" name="phone_1" class="form-control form-control-sm">
+                </div>
+                <div class="col-auto" style="margin-left: -100px;">-</div>
+                <div class="col-auto">
+                    <input type="text" id="phone" name="phone_2" class="form-control form-control-sm">
+                </div>
+                <div class="col-auto" style="margin-left: -100px;">-</div>
+                <div class="col-auto">
+                    <input type="text" id="phone" name="phone_3" class="form-control form-control-sm">
+                </div>
+
+                <div class="col-auto email">
+                    <label class="col-form-label-sm"><b>이메일</b></label>
+                </div>
+                <div class="col-auto">
+                    <input type="text" id="email" name="email_1" class="form-control form-control-sm">
+                </div>
+                <div class="col-auto" style="margin-left: -65px;">@</div>
+                <div class="col-auto">
+                    <select class="form-control form-control-sm" name="email_2" title="e-mail">
+                        <option value="">naver.com</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="hanmail.net">hanmail.net</option>
+                        <option value="hotmail.com">hotmail.com</option>
+                        <option value="korea.com">korea.com</option>
+                        <option value="nate.com">nate.com</option>
+                        <option value="yahoo.com">yahoo.com</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row g-3 align-items-center" style="margin-top: 5px;">
+                <div class="col-auto">
+                    <label class="col-form-label-sm"><b>주소</b></label>
+                </div>
+                <div class="col-auto">
+                    <input type="text" name="address_1" class="form-control form-control-sm">
+                </div>
+                <div class="col-auto">
+                    <input type="text" name="address_2" class="form-control form-control-sm">
+                </div>
+                <div class="col-auto">
+                    <button type="button" class="btn btn-secondary btn-sm">주소검색</button>
+                </div>
+                <div class="col-auto button3">
+                    <button type="button" class="btn btn-secondary btn-sm btn-sm-search">초기화</button>
+                    <button type="submit" class="btn btn-secondary btn-sm btn-sm-search">저장</button>
+                    <button type="button" class="btn btn-secondary btn-sm btn-sm-search">삭제</button>
+                </div>
+            </div>
+        </nav>
+    </form>
+    {% block main_area %}
+    {% endblock %}
+   <!-- Bootstrap(JS)-->
+   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+   integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+   crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+   integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+   crossorigin="anonymous"></script>
+</body>
+
+</html>

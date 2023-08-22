@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DTX_main</title>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var ctx = document.getElementById('donutChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: {{ labels| safe }},
+            datasets: [{
+                data: {{ values| safe }},
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(75, 192, 192, 0.6)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(75, 192, 192, 1)'
+            ],
+            borderWidth: 1
+              }]
+            },
+            options: {
+            // Customize chart options as needed
+        }
+          });
+        });
+    </script>
+
+    <style>
+        #phone {
+            width: 50%;
+        }
+
+        #email {
+            width: 70%;
+        }
+
+        .email {
+            margin-left: -70px;
+        }
+
+        .sex {
+            margin-left: 90px;
+        }
+
+        .birth {
+            margin-left: 60px;
+        }
+
+        .button3 {
+            margin-left: 50%;
+        }
+
+        .btn-sm {
+            width: 100px;
+        }
+
+        #navbar {
+            margin-top: 12px;
+            background-color: rgb(243, 243, 243);
+            padding-bottom: 10px;
+            height: 180px;
+        }
+
+
+        .col-form-label {
+            margin-top: -15px;
+
+        }
+
+        /* Table styling */
+        table {
+            width: 95%;
+            margin-left: 35px;
+            border-collapse: collapse;
+            border: solid 1px;
+            text-align: center;
+        }
+
+        /* Table header styling */
+        th {
+            background-color: #f1f1f1;
+            text-align: center;
+            padding: 12px;
+        }
+
+        /* Table row styling */
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Table cell styling */
+        td {
+            padding: 8px;
+        }
+
+        .dropdown {
+            margin-top: 10px;
+            margin-left: 50px;
+            margin-bottom: 10px;
+            display: flex;
+        }
+
+        .label {
+            margin-top: 1px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container-fluid"
+        style="height: 40px; width: 100%; background-color: rgba(13, 112, 241, 0.979); color:white;">
+        <h4><b>환자검색</b></h4>
+    </div>
+    <form action="{% url 'Medical_Patient' %}" method="POST">
+        {% csrf_token %}
+        <nav class="container-fluid" id="navbar">
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <label class="col-form-label-sm"><b>이름</b></label>
+                </div>
+                <div class="col-auto">
+                    <input id="name" name="name" class="form-control form-control-sm">
+                </div>
+                <div class="col-auto birth">
+                    <label class="col-form-label-sm"><b>생년월일</b></label>
+                </div>
+                <div class="col-auto">
+                    <input type="date" id="birth" name="birth" class="form-control form-control-sm">
+                </div>
+                <div class="col-auto sex">
+                    <label class="col-form-label-sm"><b>성별</b></label>
+                </div>
+                <div class="col-auto">
+                    <select class="form-control form-control-sm" name="sex" title="성별 선택">
+                        <option value="">--선택--</option>
+                        <option value="male">남</option>
+                        <option value="female">여</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row g-3 align-items-center e_mail" style="margin-top: -20px;">
+                <div class="col-auto">
+                    <label class="col-form-label-sm"><b>연락처</b></label>
+                </div>
+                <div class="col-auto">
+                    <input type="text" id="phone" name="phone_1" class="form-control form-control-sm">
+                </div>
+                <div class="col-auto" style="margin-left: -100px;">-</div>
+                <div class="col-auto">
+                    <input type="text" id="phone" name="phone_2" class="form-control form-control-sm">
+                </div>
+                <div class="col-auto" style="margin-left: -100px;">-</div>
+                <div class="col-auto">
+                    <input type="text" id="phone" name="phone_3" class="form-control form-control-sm">
+                </div>
+
+                <div class="col-auto email">
+                    <label class="col-form-label-sm"><b>이메일</b></label>
+                </div>
+                <div class="col-auto">
+                    <input type="text" id="email" name="email_1" class="form-control form-control-sm">
+                </div>
+                <div class="col-auto" style="margin-left: -65px;">@</div>
+                <div class="col-auto">
+                    <select class="form-control form-control-sm" name="email_2" title="e-mail">
+                        <option value="">naver.com</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="hanmail.net">hanmail.net</option>
+                        <option value="hotmail.com">hotmail.com</option>
+                        <option value="korea.com">korea.com</option>
+                        <option value="nate.com">nate.com</option>
+                        <option value="yahoo.com">yahoo.com</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row g-3 align-items-center" style="margin-top: 5px;">
+                <div class="col-auto">
+                    <label class="col-form-label-sm"><b>주소</b></label>
+                </div>
+                <div class="col-auto">
+                    <input type="text" name="address_1" class="form-control form-control-sm">
+                </div>
+                <div class="col-auto">
+                    <input type="text" name="address_2" class="form-control form-control-sm">
+                </div>
+                <div class="col-auto">
+                    <button type="button" class="btn btn-secondary btn-sm">주소검색</button>
+                </div>
+                <div class="col-auto button3">
+                    <button type="button" class="btn btn-secondary btn-sm btn-sm-search">초기화</button>
+                    <button type="submit" class="btn btn-secondary btn-sm btn-sm-search">저장</button>
+                    <button type="button" class="btn btn-secondary btn-sm btn-sm-search">삭제</button>
+                </div>
+            </div>
+        </nav>
+
+
+    <div class="container btn-group" style="width: 30%; margin-left:-15px; margin-top: 15px;">
+        <a href="{% url 'Medical_Service' %}" class="btn btn-outline-dark">서비스관리</a>
+        <a href="{% url 'Medical_Patient' %}" class="btn btn-primary">환자현황</a>
+    </div>
+
+
+    <div class="wrap" style="border: solid 1px; height: 100%;">
+        <div class="row" style="margin-top: 15px;">
+            <div class="col-sm-7" style="float:left; margin-left: 15px; width: 100%;">
+                <br>
+                <table class="table-bordered">
+                    <tr>
+                        <div class="dropdown float" style="margin-top: -10px;">
+                            <label class="col-form-label label"><b>검색:</b></label>&nbsp;
+
+                                <button class="btn btn-outline-secondary dropdown-toggle btn2" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    날짜구분
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>&nbsp;&nbsp;
+                                <div class="col-auto">
+                                    <input type="date" id="birth" name="birth" class="btn btn2 btn-outline-secondary">
+                                </div>&nbsp;
+                                <label class="col-form-label label"><b>부터</b></label>&nbsp;&nbsp;
+                                <div class="col-auto">
+                                    <input type="date" id="birth" name="birth" class="btn btn2 btn-outline-secondary">
+                                </div>&nbsp;&nbsp;
+                                <label class="col-form-label label"><b>까지</b></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <button class="btn btn2 btn-outline-secondary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    검색구분
+                                </button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div class="col-auto">&nbsp;
+                                    <input id="search" name="search" class="btn btn2 btn-outline-secondary"
+                                        style="width: 150px;">
+                                </div>&nbsp;
+                                <button type="submit" class="btn btn2 btn-outline-secondary"
+                                    style=" width: 100px;">검색</button>&nbsp;&nbsp;&nbsp;
+                            </form>
+                        </div>
+                    </tr>
+                    <tr>
+                        <th>지역</th>
+                        <th>기관명</th>
+                        <th>환자명</th>
+                        <th>성별</th>
+                        <th>연령</th>
+                        <th>교육방식<br>의사대면교육</th>
+                        <th>비대면 심리상담센터 의뢰</th>
+                        <th>교육/상담<br>실행건수</th>
+                        <th>비대면 실행건수</th>
+                        <th>총 실행건수</th>
+                    </tr>
+                    {% if cc != None %}
+                    {% for i in cc %}
+                    <tr>
+                        <td>{{ i.지역 }}</td>
+                        <td>{{ i.기관명 }}</td>
+                        <td>{{ i.환자명 }}</td>
+                        <td>{{ i.성별 }}</td>
+                        <td>{{ i.연령 }}</td>
+                        <td>{{ i.교육방식_의사대면교육 }}</td>
+                        <td>{{ i.비대면_심리상담센터_의뢰 }}</td>
+                        <td>{{ i.교육_상담_실행건수 }}</td>
+                        <td>{{ i.비대면_실행건수 }}</td>
+                        <td>{{ i.총_실행건수 }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    {% for j in aa %}
+                    <tr>
+                        <td>{{ j.지역 }}</td>
+                        <td>{{ j.기관명 }}</td>
+                        <td>{{ j.환자명 }}</td>
+                        <td>{{ j.성별 }}</td>
+                        <td>{{ j.연령 }}</td>
+                        <td>{{ j.교육방식_의사대면교육 }}</td>
+                        <td>{{ j.비대면_심리상담센터_의뢰 }}</td>
+                        <td>{{ j.교육_상담_실행건수 }}</td>
+                        <td>{{ j.비대면_실행건수 }}</td>
+                        <td>{{ j.총_실행건수 }}</td>
+                    </tr>
+                    {% endfor %}
+
+                    {% endif %}
+                </table>
+                <br>
+            </div>
+            <div class="row"
+                style="border: solid 1px; margin-left: 61px; padding-top: 20px; margin-top: 15px; height: 350px; width: 94%;">
+                <div class="col-sm-7" style="width:53%; float:left; margin-left: 35px;">
+                    {% block bb %}
+                    <h4><b>환자정보</b></h4>
+                    {% load static %}
+                    <div class="col" style="float: left; border: solid 1px; width: 300px; height: 250px;">
+                        <img src="{% static bb.profile %}" class="img-fluid" style="height:100%; width: 100%;">
+                    </div>
+                    <div class="row" style="width: 55%; float: left; margin-left: 50px;">
+                        <div class="col" style="float: left;">
+                            <b>성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명 : </b>
+                        </div>
+                        <div class="col" style="float: left;">
+                            {{ bb.환자명 }}
+                        </div>
+                        <div class="col" style="float: left; width: 100px;">
+                            <b>총&nbsp;&nbsp;&nbsp;의뢰건수: </b>
+                        </div>
+                        <div class="col" style="float: left;">
+                            {{ bb.총_실행건수 }}
+                        </div>
+                    </div>
+                    <div class="row" style="width: 55%; float: left; margin-left: 50px;">
+                        <hr />
+                        <div class="col" style="float: left;">
+                            <b>성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;별 : </b>
+                        </div>
+                        <div class="col" style="float: left;">
+                            {{ bb.성별 }}
+                        </div>
+                        <div class="col" style="float: left;">
+                            <b>개인정보동의: </b>
+                        </div>
+                        <div class="col" style="float: left;">
+                            {{ bb.개인정보동의 }}
+                        </div>
+                    </div>
+                    <div class="row" style="width: 55%; float: left; margin-left: 50px;">
+                        <hr />
+                        <div class="col" style="float: left;">
+                            <b>연&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;령 : </b>
+                        </div>
+                        <div class="col" style="float: left; margin-left: -250px;">
+                            {{ bb.연령 }}
+                        </div>
+                    </div>
+                    <div class="row" style="width: 55%; float: left; margin-left: 50px;">
+                        <hr />
+
+                        <div class="col" style="float: left;">
+                            <b>교육이수 : </b>
+                        </div>
+                        <div class="col" style="float: left; margin-left: -250px;">
+                            {{ bb.교육방식_의사대면교육 }}
+                        </div>
+                    </div>
+                    <div class="row" style="width: 55%; float: left; margin-left: 50px;">
+                        <hr />
+
+                        <div class="col" style="float: left;">
+                            <b>상담의뢰 : </b>
+                        </div>
+                        <div class="col" style="float: left; margin-left: -250px;">
+                            {{ bb.비대면_심리상담센터_의뢰 }}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-7" style="width:40%; margin-left:60px;">
+                    <h4><b>진료메모</b></h4>
+                    <div class="row mb-3">
+                        <input type="text" class="form-control" style="height: 250px; margin-left:10px; width:96%;">
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="border: solid 1px; margin-left: 61px; margin-top: 15px; height: 400px; width: 94%;">
+                <div class="col"
+                    style="float: left; width: 100px; height: 340px; margin-top: 40px; margin-left: 250px;">
+                    <img src="{% static bb.graph %}" class="img-fluid" style="height:80%; width: 80%;">
+                </div>
+            </div>
+
+            <div class="row"
+                style="border: solid 1px; margin-left: 61px; margin-top: 15px; height: 1000px; width: 94%;">
+                <div style="margin-top: 20px;">
+                    <label class="col-form-label label">
+                        <h4><b>일주일 건강관리 상세</b></h4>
+                    </label>&nbsp;
+                    <button class="btn btn-outline-secondary dropdown-toggle btn2" type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        선택
+                    </button>
+                </div>
+                <div class="col" style="margin-top: -70px; float: left; width: 300px; height: 550px;">
+                    <img src="/static/images/line_chart.jpg" class="img-fluid" style="height:100%; width: 100%;">
+                </div>
+                <hr>
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" style="margin-top:-100px; height:60px; width: 200px;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        진료메모
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><b>Note: 식생활 습관 매우 불량한 상태로 식습관 개선을 위해 전문가 상담 필요</b></li>
+                        <li><b>1주일 평균 3회 계란 섭취 중</b></li>
+                        <li><b>Note: 고 스트레스군, 매우 긴장하거나 불안한 상태로 전문상담 필요</b></li>
+                        <li><b>최근 3개월 동안 2주이상 슬프거나 절망감을 느낌</b></li>
+                    </ul>
+                  </div>
+
+            </div>
+            {% endblock %}
+        </div>
+    </div>
+
+    <!-- Bootstrap(JS)-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

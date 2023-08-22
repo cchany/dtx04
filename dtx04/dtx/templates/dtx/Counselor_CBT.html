@@ -1,0 +1,290 @@
+{% extends 'dtx/base_service.html' %}
+
+{% block main_area %}
+
+    <div class="container btn-group" style="width: 30%; margin-left:-15px; margin-top: 15px;">
+        <a href="{% url 'Counselor_CBT' %}" class="btn btn-primary">CBT상담관리</a>
+        <a href="{% url 'Counselor_perform' %}" class="btn btn-outline-dark">기관실적현황</a>
+    </div>
+    {% block bb %}
+    
+    <div class="wrap" style="border: solid 1px; height: 721px;">
+        <div class="row" style="margin-top: 15px;">
+            <div class="col-sm-7" style="width:25%; float:left; margin-left: 15px;">
+                <h4><b>상담</b></h4>
+                <table class="table" style="border: solid 1px;">
+                    <thead style="background-color: rgba(13, 112, 241, 0.979); color:white;">
+                        <tr>
+                            <th>상담일자</th>
+                            <th>상담구분</th>
+                            <th>상담유형</th>
+                        </tr>
+                    </thead>
+                    <tbody style="height: 202px; background-color: rgb(243, 243, 243);">
+                        <tr class="tr" style="background-color: rgb(255, 255, 255);">
+                            <td>{{ bb.측정일자 }}</td>
+                            <td>{{ bb.상담구분 }}</td>
+                            <td>{{ bb.상담유형 }}</td>
+                        </tr>
+                        <tr class="tr">
+                            <td>-</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="tr">
+                            <td>-</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="tr">
+                            <td>-</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="tr">
+                            <td>-</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr class="tr">
+                            <td>-</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-7" style="width:40%; float:left; margin-left:15px;">
+                <h4><b>검사결과</b></h4>
+                <table class="table" style="border: solid 1px;">
+                    <thead style="background-color: rgba(13, 112, 241, 0.979); color:white;">
+                        <tr>
+                            <th>측정일자</th>
+                            <th>측정구분</th>
+                            <th>측정항목</th>
+                            <th>상담구분</th>
+                            <th>정상치</th>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color: rgb(243, 243, 243);">
+                        <tr style="background-color: rgb(255, 255, 255);">
+                            <td>{{ bb.측정일자 }}</td>
+                            <td>{{ bb.측정구분 }}</td>
+                            <td>{{ bb.측정항목 }}</td>
+                            <td>{{ bb.상담구분 }}</td>
+                            <td>{{ bb.정상치 }}</td>
+
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-7" style="width:30%; float:left; margin-left:15px;">
+                <h4><b>인지치료센터 상담요청내역</b></h4>
+                <div class="row" style="border: solid 1px; padding-top: 10px; background-color: rgb(243, 243, 243);">
+                    <div class="row mb-3">
+                        <label class="col-sm-6"><b>요청자</b></label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-6 "><b>상담예정일</b></label>
+                        <div class="col-sm-6">
+                            <input type="date" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-6"><b>상담요청일</b></label>
+                        <div class="col-sm-6">
+                            <input type="date" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-6"><b>생활습관 개선정도</b></label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <input type="text" class="form-control" style="height: 130px; margin-left:10px; width:96%;">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <form action="{% url 'Counselor_CBT' %}" method="POST">
+            {% csrf_token %}
+
+            <div class="row mb-3" style="width: 100%; margin-top:-29px; margin-left:10px;">
+                <div class="col-sm-6" style="width: 25%;">
+                    <div class="row g-3 align-items-center">
+                        <div class="col-auto">
+                            <label class="form-control-sm"><b>상담일</b></label>
+                        </div>
+                        <div class="col-auto">
+                            <input type="date" id="birth" name="date" class="form-control-sm">
+                        </div>
+                        <div class="col-auto" style="margin-left: 30px;">
+                            <label for="sex" class="form-control-sm"><b>의뢰차수</b></label>
+                        </div>
+                        <div class="col-auto">
+                            <select class="form-control-sm" title="의뢰차수" onclick="">
+                                <option value="">--선택--</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row g-3 align-items-center" style="margin-top: -10px;">
+                        <div class="col-auto">
+                            <label for="sex" class="form-control-sm"><b>상담유형</b></label>
+                        </div>
+                        <div class="col-auto">
+                            <select class="form-control-sm" name="coun" title="상담유형" onclick="" style="width: 280%; margin-left: -14px;">
+                                <option value="">--선택--</option>
+                                <option value="대면상담">대면상담</option>
+                                <option value="원격상담">원격상담</option>
+                            </select>
+                        </div>
+                        <div class="col-auto" style="margin-left:150px;">
+                            <button type="button" class="btn btn-secondary btn-sm" style="width:102px;">표준상담</button>
+                        </div>
+                        <div class="row mb-3">
+                            <input type="text" class="form-control"
+                                style="height: 200px; margin-left:10px; width:100%; margin-top:10px;">
+                        </div>
+                        <div class="col-auto" style="margin-top:2px; margin-left: 25%;">
+                            <button type="button" class="btn btn-secondary btn-sm">초기화</button>&nbsp;&nbsp;
+                            <button type="submit" class="btn btn-secondary btn-sm">저장</button>&nbsp;&nbsp;
+                            <button type="button" class="btn btn-secondary btn-sm">삭제</button>&nbsp;&nbsp;
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="col-sm-3" style="width:72.3%; float:left; margin-left:15px; margin-top: 20px;">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h4><b>상담계획</b></h4>
+                    </div>
+                    <div class="col-auto">
+                        <select class="form-control-sm" title="상담유형" onclick=""
+                            style="margin-left: -350%; width: 200%;">
+                            <option value="">전체</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                        </select>
+                    </div>
+                </div>
+                <table class="table" style="border: solid 1px;">
+                    <thead style="background-color: rgba(13, 112, 241, 0.979); color:white;">
+                        <tr>
+                            <th>구분</th>
+                            <th>작성일</th>
+                            <th>상담내역</th>
+                            <th>실행목표</th>
+                            <th>실행계획</th>
+                            <th>실행평가</th>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color: rgb(243, 243, 243);">
+                        <tr style="background-color: rgb(255, 255, 255);">
+                            <td>{{ bb.상담구분 }}</td>
+                            <td>{{ bb.상담일자 }}</td>
+                            <td>{{ bb.상담내역 }}</td>
+                            <td>{{ bb.실행목표 }}</td>
+                            <td>{{ bb.실행계획 }}</td>
+                            <td>{{ bb.실행평가 }}</td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+    {% endblock %}

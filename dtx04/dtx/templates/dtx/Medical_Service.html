@@ -218,55 +218,300 @@
 
 
 <div class="container btn-group" style="width: 30%; margin-left:-15px; margin-top: 15px;">
-    <a href="{% url 'Medical_Service' %}" class="btn btn-primary">서비스관리</a>
+    <a href="{% url 'Medical_Service' %}" class="btn btn-primary">마이데이터</a>
         <a href="{% url 'Medical_Patient' %}" class="btn btn-outline-dark">환자현황</a>
     </div>
-    <div class="wrap" style="border: solid 1px; height: 721px;">
+    <div class="wrap" style="width: 100%;">
         <div class="row" style="margin-top: 15px;">
-            <div class="col-sm-7" style="width:70%; float:left; margin-left: 15px;">
-                <h4><b>질환예측</b></h4>
-                <div class="row" style="float:left; height: 662px; border: solid 1px; padding-top: 10px; background-color: rgb(243, 243, 243);">
+            <table class="table-bordered" style="width: 95%; margin-left:auto;margin-right:auto;">
+                <tr>
+                    <th>지역</th>
+                    <th>기관명</th>
+                    <th>환자명</th>
+                    <th>성별</th>
+                    <th>연령</th>
+                    <th>교육방식<br>의사대면교육</th>
+                    <th>비대면 심리상담센터 의뢰</th>
+                    <th>교육/상담<br>실행건수</th>
+                    <th>비대면 실행건수</th>
+                    <th>총 실행건수</th>
+                </tr>
+                {% if cc != None %}
+                {% for i in cc %}
+                <tr>
+                    <td>{{ i.지역 }}</td>
+                    <td>{{ i.기관명 }}</td>
+                    <td>{{ i.환자명 }}</td>
+                    <td>{{ i.성별 }}</td>
+                    <td>{{ i.연령 }}</td>
+                    <td>{{ i.교육방식_의사대면교육 }}</td>
+                    <td>{{ i.비대면_심리상담센터_의뢰 }}</td>
+                    <td>{{ i.교육_상담_실행건수 }}</td>
+                    <td>{{ i.비대면_실행건수 }}</td>
+                    <td>{{ i.총_실행건수 }}</td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                {% for j in aa %}
+                <tr>
+                    <td>{{ j.지역 }}</td>
+                    <td>{{ j.기관명 }}</td>
+                    <td>{{ j.환자명 }}</td>
+                    <td>{{ j.성별 }}</td>
+                    <td>{{ j.연령 }}</td>
+                    <td>{{ j.교육방식_의사대면교육 }}</td>
+                    <td>{{ j.비대면_심리상담센터_의뢰 }}</td>
+                    <td>{{ j.교육_상담_실행건수 }}</td>
+                    <td>{{ j.비대면_실행건수 }}</td>
+                    <td>{{ j.총_실행건수 }}</td>
+                </tr>
+                {% endfor %}
+
+                {% endif %}
+            </table>
+        </div>
+            <div class="col-sm-8" style="float:left; width:70%;  margin-left:37px;margin-right:auto;">
+                <br><h5><b>∎질환예측</b></h5>
+            </div>
+            <div class="col-sm-3" style="float:left;  margin-left:-170px; margin-right:auto;">
+                <br><h5><b>∎건강통계</b></h5>
+            </div>
+
+            <div class="col-sm-8" style="float:left; height:100%; width:60%; border: solid 1px; margin-left:37px;margin-right:auto;">
+                <div class="col-sm-3" style="float:left; height:100%; width:30%;  ">
+                    <div class="col-sm-3" style="margin-left: 10px; margin-top:10px; float:left; height:530px; width:65%; border: solid 1px; ">
+                        <div class="row mb-3" style="margin-top: 15px; height: 50px; margin-left:10px;">
+                            <img src="/static/images/light.png" class="img-fluid" style="height:30px; width: 25%;">
+                            <div class="col-sm-9" style="margin-top: 10px;">
+                                <h6><b>우울증</b></h6>
+                            </div>
+                        </div>
+                        <div class="row mb-3" style="margin-top: 5px; height: 50px; margin-left:10px;">
+                            <img src="/static/images/light.png" class="img-fluid" style="height:30px; width: 25%;">
+                            <div class="col-sm-9" style="margin-top: 10px;">
+                                <h6><b>정신분열증</b></h6>
+                            </div>
+                        </div>
+                        <div class="row mb-3" style="margin-top: 5px; height: 50px; margin-left:10px;">
+                            <img src="/static/images/light.png" class="img-fluid" style="height:30px; width: 25%;">
+                            <div class="col-sm-9" style="margin-top: 10px;">
+                                <h6><b>조울증</b></h6>
+                            </div>
+                        </div>
+                        <div class="row mb-3" style="margin-top: 5px; height: 50px; margin-left:10px;">
+                            <img src="/static/images/light_color.jpg" class="img-fluid" style="height:30px; width: 25%;">
+                            <div class="col-sm-9" style="margin-top: 10px;">
+                                <h6><b>치매</b></h6>
+                            </div>
+                        </div>
+                        <div class="row mb-3" style="margin-top: 5px; height: 50px; margin-left:10px;">
+                            <img src="/static/images/light.png" class="img-fluid" style="height:30px; width: 25%;">
+                            <div class="col-sm-9" style="margin-top: 10px;">
+                                <h6><b>공황장애</b></h6>
+                            </div>
+                        </div>
+                        <div class="row mb-3" style="margin-top: 5px; height: 50px; margin-left:10px;">
+                            <img src="/static/images/light.png" class="img-fluid" style="height:30px; width: 25%;">
+                            <div class="col-sm-9" style="margin-top: 10px;">
+                                <h6><b>망상장애</b></h6>
+                            </div>
+                        </div>
+                        <div class="row mb-3" style="margin-top: 5px; height: 50px; margin-left:10px;">
+                            <img src="/static/images/light.png" class="img-fluid" style="height:30px; width: 25%;">
+                            <div class="col-sm-9" style="margin-top: 10px;">
+                                <h6><b>강박</b></h6>
+                            </div>
+                        </div>
+                        <div class="row mb-3" style="margin-top: 5px; height: 50px; margin-left:10px;">
+                            <img src="/static/images/light.png" class="img-fluid" style="height:30px; width: 25%;">
+                            <div class="col-sm-9" style="margin-top: 10px;">
+                                <h6><b>불안</b></h6>
+                            </div>
+                        </div>                
+                    </div>
+
+                    <div class="col-sm-3" style="margin-left: 10px; margin-top:10px; float:left; height:266px; width:65%; border: solid 1px; ">
+                        <div class="flex-item" style=" width:100%;">
+                            <div class="flex-item" style="background-color: blue; color:white; border:solid 1px; width:100%; text-align: center;">특이사항</div>
+                            <div class="flex-item" style="width:100%; text-align: center; margin-top: 50px;">
+                                채혈시간: 7시-8시
+                            </div>
+                            <div class="flex-item" style="width:100%; text-align: center;">
+                                처방내역 : SSRI
+                            </div>
+                            <div class="flex-item" style="width:100%; text-align: center;">
+                                웨어러블 : 혈당계
+                            </div>
+                            <div class="flex-item" style="width:100%; text-align: center;">
+                                수술내역 : 없음
+                            </div>
+                            <div class="flex-item" style=" width:100%; text-align: center;">
+                                예방접종 : COVID-19
+                            </div>
+                        </div>                    
+                    </div>
+                </div>
+
+                <div class="col-sm-8" style="float:left; margin-left:-70px; width:70%; height:auto; ">
+                    <div class="col-sm-3" style="margin-left: -10px; margin-top:10px; float:left; height:350px; width:108%; border: solid 1px; ">
+                        <div class="row g-3" style="margin-top: -10px; margin-left: 10px;">
+                            <div class="col-auto">
+                                <select class="form-control-sm" name="sex" title="성별 선택">
+                                    <option value="">카테고리</option>
+                                    <option value="male">남</option>
+                                    <option value="female">여</option>
+                                </select>
+                            </div>
+                            <div class="col-auto">
+                                <select class="form-control-sm" name="sex" title="성별 선택">
+                                    <option value="">기간</option>
+                                    <option value="male">남</option>
+                                    <option value="female">여</option>
+                                </select>
+                            </div>
+                        </div>
+                        <img src="/static/images/우울증 발생 위험.jpg" class="img-fluid" style=" margin-left: 15px; height:200px; width: 52%;">
+                        <img src="/static/images/정신건강퍼센타일.jpg" class="img-fluid" style=" margin-left: 15px; height:250px; width: 40%;">
+                    </div>
+                    <div class="col-sm-3" style="margin-left: -10px; margin-top:10px; float:left; height:450px; width:108%;border: solid 1px;">
+                        <img src="/static/images/위험인자.jpg" class="img-fluid" style="float:left; margin-top:60px; margin-left: 15px; height:80%; width: 60%;">
+                        <table class="table" style="height: 80%; width:30%; float:left; margin-top:40px;">
+                            <thead>
+                              <tr>
+                                <th scope="col" colspan="2" style="background-color:blue; color: white;">건강관리 우선 순위</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row">1순위</th>
+                                <td>코티솔 관리</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">2순위</th>
+                                <td>혈당 관리</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">3순위</th>
+                                <td>고혈압 관리</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">4순위</th>
+                                <td>간 수치 관리</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">5순위</th>
+                                <td>스트레스 관리</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">6순위</th>
+                                <td>수면 관리</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3" style="width:35%; float:left; height:400px;; border: solid 1px; margin-left:22px;">
+                <img src="/static/images/건강통계.jpg" class="img-fluid" style="margin-top:20px; margin-left: 15px; height:95%; width: 97%;">
+            </div>
+            <div class="col-sm-3" style=" float:left; margin-left:22px; margin-right:auto;">
+                <br><h5><b>∎건강관리</b></h5>
+            </div>
+            
+            <div class="col-sm-3" style=" width:35%; float:left; height:366px; border: solid 1px; margin-left:22px;">
+                <div class="flex-container" style="margin-top: 10px; margin-left: 6px; width: 48%; float:left">
+                    <div class="flex-item" style=" width:100%; margin-top:1px; border: solid 1px;">
+                        <div class="flex-item" style="background-color: blue; color:white; border:solid 1px; width:100%; text-align: center;">생활습관 목표</div>
+                        <div class="flex-item" style="width:100%;">
+                            <b>&nbsp1. 운동</b>
+                        </div>
+                        <br>
+                        <div class="flex-item" style="width:100%;">
+                            &nbsp고빈도(주 5회 이상)운동 시 정신질환 발생 &nbsp위험도 40% 감소
+                        </div>
+                        <br>
+                        <div class="flex-item" style="width:100%;">
+                            <b>&nbsp2. 음주</b>
+                        </div>
+                        <br>
+                        <div class="flex-item" style="width:100%;">
+                            &nbsp고빈도(주 5회 이상)음주 시 정신질환 발생 &nbsp위험도 50% 증가
+                        </div>
+                        <br>
+                        <div class="flex-item" style=" width:100%;">
+                            <b>&nbsp3. 흡연</b>
+                        </div>
+                        <br>
+                        <div class="flex-item" style="width:100%;">
+                            &nbsp흡연 시 정신질환 발생 위험 129% 증가
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-3"style="margin-top: 30px; height: 350px; margin-left: 20px; width: 46%; float:left;">
+                    <div class=""style="height:100px; width:100%;">
+                        <div class="flex-item" style="height:100px; border: solid 1px;">
+                            <img src="/static/images/운동.jpg" class="img-fluid" style="margin-top:10px; height:85%; width: 47%;">
+                            <b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp운동 권고</b></div>
+                        <div class="flex-item" style="height:100px; border: solid 1px; margin-top:5px;">
+                            <img src="/static/images/drink.jpg" class="img-fluid" style="margin-top:10px; height:85%; width: 47%;">
+                            <b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp금주 권고</b></div>
+                        <div class="flex-item" style="height:100px; border: solid 1px; margin-top:5px;">
+                            <img src="/static/images/smoke.jpg" class="img-fluid" style="margin-left:20px; margin-top:10px; height:87%; width: 35%;">
+                            <b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp금연 권고</b></div>
+                    </div>
                     
-                    <div class="row" style="margin-left: 15px; width: 22%; height: 400px; border: solid 1px; background-color: rgb(255, 255, 255);">
+                </div>
+
+                 </div>
+            </div>
+
+            {% comment %} <div class="col-sm-7" style="width:70%; float:left; margin-left: 15px;">
+                <h5 style="margin-left: 15px; margin-top:10px;"><b>질환예측</b></h5>
+                <div class="row" style="float:left; height: 662px; border: solid 1px; width: 97%; margin-left:19px; margin-right:auto; background-color: rgb(243, 243, 243);">
+                    
+                    <div class="row" style="text-align: center; margin-top: 10px; margin-left: 15px; width: 22%; height: 400px; border: solid 1px; background-color: rgb(255, 255, 255);">
                             <div class="row mb-3" style="margin-top: 5px; height: 50px;">
-                                <img src="/static/images/light.png" class="img-fluid" style="height:40px; width: 25%;">
+                                <img src="/static/images/light.png" class="img-fluid" style="height:38px; width: 25%;">
                                 <div class="col-sm-9" style="margin-top: 10px;">
-                                    <h6><b>우울증(F32,F33)</b></h6>
+                                    <h6><b>우울증</b></h6>
                                 </div>
                             </div>
                             <div class="row mb-3" style="margin-top: 3px; height: 45px;">
-                                <img src="/static/images/light.png" class="img-fluid" style="height:40px; width: 25%;">
+                                <img src="/static/images/light.png" class="img-fluid" style="height:38px; width: 25%;">
                                 <div class="col-sm-9" style="margin-top: 10px;">
-                                    <h6><b>정신분열증(F20)</b></h6>
+                                    <h6><b>정신분열증</b></h6>
                                 </div>
                             </div>
                             <div class="row mb-3" style="margin-top: 3px; height: 45px;">
-                                <img src="/static/images/light.png" class="img-fluid" style="height:40px; width: 25%;">
+                                <img src="/static/images/light.png" class="img-fluid" style="height:38px; width: 25%;">
                                 <div class="col-sm-9" style="margin-top: 10px;">
-                                    <h6><b>조울증(F30,F31)</b></h6>
+                                    <h6><b>조울증</b></h6>
                                 </div>
                             </div>
                             <div class="row mb-3" style="margin-top: 3px; height: 45px;">
-                                <img src="/static/images/light_color.jpg" class="img-fluid" style="height:40px; width: 25%;">
+                                <img src="/static/images/light_color.jpg" class="img-fluid" style="height:38px; width: 25%;">
                                 <div class="col-sm-9" style="margin-top: 10px;">
-                                    <h6><b>치매(F00-F03, G30)</b></h6>
+                                    <h6><b>치매</b></h6>
                                 </div>
                             </div>
                             <div class="row mb-3" style="margin-top: 3px; height: 45px;">
-                                <img src="/static/images/light.png" class="img-fluid" style="height:40px; width: 25%;">
+                                <img src="/static/images/light.png" class="img-fluid" style="height:38px; width: 25%;">
                                 <div class="col-sm-9" style="margin-top: 10px;">
-                                    <h6><b>공황장애(F410)</b></h6>
+                                    <h6><b>공황장애</b></h6>
                                 </div>
                             </div>
                             <div class="row mb-3" style="margin-top: 3px; height: 45px;">
-                                <img src="/static/images/light.png" class="img-fluid" style="height:40px; width: 25%;">
+                                <img src="/static/images/light.png" class="img-fluid" style="height:38px; width: 25%;">
                                 <div class="col-sm-9" style="margin-top: 10px;">
-                                    <h6><b>망상장애(F22)</b></h6>
+                                    <h6><b>망상장애</b></h6>
                                 </div>
                             </div>
                     </div> 
+                
 
-                    <div class="row" style="background-color: rgb(255, 255, 255); margin-left: 23px; width: 75%; height: 280px; border: solid 1px;">
+                    <div class="row" style="margin-top: 10px; background-color: rgb(255, 255, 255); margin-left: 23px; width: 75%; height: 280px; border: solid 1px;">
                         <div class="col-auto" style="width: 350px; height: 248px;">
                             <div class="row g-3" style="margin-top: -10px;">
                                 <div class="col-auto">
@@ -284,26 +529,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="row" style="background-color: rgb(255, 255, 255); margin-left: 1px; width: 90%; height: 220px; margin-top: 5px;">
-                                <table class="table-bordered" style="text-align: center;">
-                                    <tr style="background-color: rgba(13, 112, 241, 0.979); color:white;">
-                                      <th colspan="2">주요 검사 수치(평균)</th>
-                                    </tr>
-                                    <tr>
-                                      <td>코티솔</td>
-                                      <td>18.9</td>
-                                    </tr>
-                                    <tr>
-                                        <td>혈당</td>
-                                        <td>120</td>
-                                    </tr>
-                                    <tr>
-                                        <td>혈압</td>
-                                        <td>121/143</td>
-                                    </tr>
-                                  </table>
-
-                            </div>
+                            
                         </div>
                         <img src="/static/images/gra3.png" class="img-fluid" style="margin-top: -230px; margin-left: 350px; height:250px; width: 60%;">
                     </div>
@@ -311,7 +537,9 @@
 
 
                     <div class="row" style="background-color: rgb(255, 255, 255); margin-left: 15px; width: 22%; height: 230px; border: solid 1px;">
-                        <table class="table-bordered" style=" text-align: center;">
+
+                    
+                        <table class="table table-bordered border-primary" style="margin-left: -6px; width:100%; text-align: center;">
                             <tr style="background-color: rgba(13, 112, 241, 0.979); color:white;">
                               <th colspan="2">특이사항</th>
                             </tr>
@@ -337,6 +565,7 @@
                             </tr>
                           </table>
                     </div>
+
 
                     
                     <div class="row" style="background-color: rgb(255, 255, 255); margin-top:-120px; margin-left:23px; width: 75%; height: 350px; border: solid 1px;">
@@ -379,21 +608,20 @@
             </div>
 
 
-            <div class="col-sm-5" style="width:27%; float:left; margin-left: 15px;">
-                <h4><b>건강통계</b></h4>
+            <div class="col-sm-5" style=" margin-top:10px; width:28%; float:left; margin-left: -16px;">
+                <h5><b>건강통계</b></h5>
                 <div class="row" style="margin-left: 5px; width: 100%; height: 260px; border: solid 1px; background-color: rgb(243, 243, 243);">
                 </div>
                 <br><br>
-                <h4><b>건강관리</b></h4>
+                <h5><b>건강관리</b></h5>
                 <div class="row" style="margin-left: 5px; width: 100%; height: 260px; border: solid 1px; background-color: rgb(243, 243, 243);">
                 </div>
 
-            </div>
+            </div> {% endcomment %}
 
 
 
 
-        </div>
 
     </div>
     

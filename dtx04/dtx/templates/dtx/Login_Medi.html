@@ -99,7 +99,7 @@
                     </div>
                     <br><br>
                     <div class="col-sm-7 btn-group">
-                        <form style="text-align: center;" method="post" action="{% url 'Login_Medi' %}" id="login-form">
+                        <form style="text-align: center;" method="POST" action="{% url 'Login_Medi' %}" id="login-form">
                             {% csrf_token %}
                             <input type="text" name="username" placeholder="아이디">
                             <input type="password" name="password" placeholder="비밀번호">

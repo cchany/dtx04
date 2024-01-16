@@ -7,15 +7,11 @@ from django.utils import timezone
 # Create your models here.
 class User(models.Model):
     id = models.BigAutoField(help_text="User ID", primary_key=True)
-    name = models.CharField(max_length=15)
-    sex = models.CharField(max_length=10)
-    date = models.DateField()
-    address = models.CharField(max_length=50)
-    phone_number = models.CharField(max_length=50)
-    email = models.CharField(max_length=40)
+    login_id = models.CharField(max_length=32, unique=True, verbose_name='user 아이디')
+    login_pw = models.CharField(max_length=128, verbose_name='user 비밀번호')
     
     def __str__(self):
-        return f'[{self.pk}] {self.name}'
+        return f'[{self.pk}] {self.pk}' 
 
     def get_absolute_url(self):
         return f'/dtx04/{self.pk}/'

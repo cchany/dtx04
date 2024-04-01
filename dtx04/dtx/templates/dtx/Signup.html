@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./checkBox.js"></script>
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<style>
+    body {
+    }
+
+    .wrap {
+        height: auto;
+        width: auto;
+    }
+</style>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+    <div class="wrap">
+        <div class="row">
+            <div class="col-sm-7" style="margin: 0 auto;">
+                <br><br>
+                <div class="login-wrapper"  style="text-align:center;">
+                    <h3><b>DTx에서 정신건강 서비스를 시작하세요!</b></h3>
+                    <br><br>
+                    <form method="POST" action="{% url 'Signup' %}" id="Signup-form">
+                        {% csrf_token %}
+                        {% block res_data %}
+                        {% if error != None %}
+                        <div class="alert alert-danger col-sm-7" role="alert" style=" margin-left: 230px;">
+                            {{error}}
+                        </div>
+                        {% endif %}
+                        {% endblock %}
+                        <div class="col-sm-7 btn-group" style="font-size: 20px;">
+                            <h4><b>사업자등록번호</b></h4>
+                        </div>
+                        <div class="col-sm-7 btn-group" style="width:45%; font-size: 10px; float: right;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                                
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"  name="business_pass" value="1">&nbsp;사업자번호가 없어요                  
+                        </div>
+                        <div class="col-sm-7 btn-group" style="font-size: 20px;">
+                            <input class="form-control" name="business_num">
+                        </div>
+                        <br><br><br>
+
+                        <div class="col-sm-7 btn-group" style="font-size: 20px;">
+                            <h4><b>병원 인증</b></h4>
+                        </div>
+                        <div class="container" style="border: solid 1px; width: 640px;  background-color:rgb(226, 234, 250);">
+                            <br><br>
+                            <div class="col-sm-7 btn-group" style="font-size: 20px;">
+                                <b>사업자등록증명원</b>을 첨부해주세요
+                            </div>
+                            <img src="/static/images/saup.png" class="img-fluid" style="height:300px;">
+                            <br><br>
+                            <div class="col-sm-7 btn-group" style="margin-left:120px;font-size: 15px;">
+                            {% comment %} <label for="file">
+                                <div class="btn-upload btn" style="text-align:center; background-color:rgb(46, 91, 183); color: white;">파일 업로드하기</div>
+                            </label> {% endcomment %}
+                            <input type="file" name="business_file" id="file" style="width: 250px; background-color: rgb(46, 91, 183); color: white;">
+                            </div>
+                            <br><br>
+                            <div class="col-sm-7 btn-group" style="margin-left:180px; font-size: 15px;">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"  name="file_pass" value="1">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                &nbsp;다음에 인증할게요
+                                </label>                    
+                            </div>
+                            <br><br>
+                        </div>
+                        <br><br>
+                        <div class="col-sm-7 btn-group" style="font-size: 20px;">
+                            <h4><b>아이디</b></h4>
+                        </div>
+                        <div class="col-sm-7 btn-group" style="font-size: 20px;">
+                            <input class="form-control" name="username" placeholder="4~20자리 / 영문, 숫자, 특수문자 '_'사용가능">
+                        </div>
+                        <br><br>
+
+                        <div class="col-sm-7 btn-group" style="font-size: 20px;">
+                            <h4><b>비밀번호</b></h4>
+                        </div>
+                        <div class="col-sm-7 btn-group" style="font-size: 20px;">
+                            <input class="form-control" name="pw" type="password" placeholder="8~16자리 / 영문 대소문자, 숫자, 특수문자 조합">
+                        </div>
+                        <br><br>
+
+                        <div class="col-sm-7 btn-group" style="font-size: 20px;">
+                            <h4><b>이름</b></h4>
+                        </div>
+                        <div class="col-sm-7 btn-group" style="font-size: 20px;">
+                            <input class="form-control" name="name" placeholder="이름 입력">
+                        </div>
+                        <br><br>
+
+                        <div class="col-sm-7 btn-group" style="font-size: 20px;">
+                            <h4><b>소속 기관</b></h4>
+                        </div>
+                        <div class="col-sm-7 btn-group" style="font-size: 20px;">
+                            <input class="form-control" name="inst" placeholder="소속 기관 입력">
+                        </div>
+                        <br><br>
+
+                        <div class="col-sm-7 btn-group" style="font-size: 20px;">
+                            <h4><b>휴대폰</b></h4>
+                        </div>
+                        <div class="col-sm-7 btn-group" style="font-size: 20px;">
+                            <input class="form-control" name="phone" placeholder="'-'빼고 숫자만 입력" style="width: 350px;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="submit" class="btn" style="width: 250px; background-color: rgb(46, 91, 183); color: white;" value="인증 요청">
+                        </div>
+                        <br><br>
+
+                        <div class="col-sm-7 btn-group" style="font-size: 20px;">
+                            <h4><b>이메일</b></h4>
+                        </div>
+                        <div class="col-sm-7 btn-group" style="font-size: 20px;">
+                            <input class="form-control" name="mail" placeholder="email@dtx.co.kr">
+                        </div>
+                        <br><br>
+                        
+                        <div class="col-sm-7 btn-group" style="font-size: 20px;">
+                            <h4><b>약관</b></h4>
+                        </div>
+                        <div class="container" style="border: solid 1px; width: 640px; background-color: white;">
+                            <br>
+                            <div class="col-sm-7" style="margin-left: -102px;">
+                                <input class="form-check-input" type="checkbox"  name="chkAll" value="1" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">&nbsp;전체동의</label>                    
+                            </div>
+                            <div style="text-align:left; font-size:11px;">
+                                <span style="margin-left: 40px;">마케팅 정보 수신 동의 (이메일, SMS/MMS) (선택) 동의를 포함합니다.</span>
+                            </div>
+                            <br>
+                        </div>
+                        <div class="container" style="border: solid 1px; width: 640px; background-color: white;">
+                            <br>
+                            <div class="col-sm-7"style="margin-left:-10px;">
+                                <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="chk1" value="1">
+                                <label class="form-check-label" for="flexCheckDefault">&nbsp;(필수) 병원/기업 회원 약관에 동의</label>                    
+                            </div>
+                            <br>
+                            <div class="col-sm-7" style="margin-left:-2px;">
+                                <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="chk2" value="1">
+                                <label class="form-check-label" for="flexCheckDefault">&nbsp;(필수) 개인정보 수집 및 이용에 동의</label>                    
+                            </div>
+                            <br>
+                            <div class="col-sm-7" style="margin-left: -2px;">
+                                <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="chk3" value="1">
+                                <label class="form-check-label" for="flexCheckDefault">&nbsp;(필수) SMS 발송 서비스 약관에 동의</label>                    
+                            </div>
+                            <br>
+                            <div class="col-sm-7" style="margin-left: -2px;">
+                                <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="chk4" value="1">
+                                <label class="form-check-label" for="flexCheckDefault">&nbsp;(선택) 마케팅정보 수신 동의 -이메일</label>                    
+                            </div>
+                            <br>
+                            <div class="col-sm-7" style="margin-left: 15px;">
+                                <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="chk5" value="1">
+                                <label class="form-check-label" for="flexCheckDefault">&nbsp;(선택) 마케팅정보 수신 동의 - SMS/MMS</label>                    
+                            </div>
+                            <br>
+                        </div>
+                        <br>
+                        </div>
+                        <input type="submit" class="btn" style="width: 640px; margin-left: 230px; background-color: rgb(46, 91, 183); color: white;" value="병원 등록 완료">
+                        <br>
+                        <br>
+
+                    </form>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

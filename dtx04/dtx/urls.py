@@ -24,5 +24,7 @@ urlpatterns = [
     path('Permission/', views.Permission, name='Permission'),
     path('Region_status/', views.Region_status, name='Region_status'),
 
+    path('Signup/', views.Signup, name='Signup'),
+
 
 ]

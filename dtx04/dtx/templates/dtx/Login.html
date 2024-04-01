@@ -16,14 +16,14 @@
     }
 
     .wrap {
-        border: solid 1px;
-        height: 1005px;
+        height: auto;
         width: 1614px;
         margin-left: 306px;
     }
 
     .left-side-bar {
         float: left;
+        margin-top: -25px;
         width: 20%;
         height: 100vh;
         background-color: rgb(46, 91, 183);
@@ -121,7 +121,7 @@
                             {% endif %}
                             {% endblock %}
                             <input type="submit" value="로그인">
-                            
+                            <a href="{% url 'Signup' %}" style="color:black;">아직 회원이 아니신가요?</a>
                             
                         </form>
                         

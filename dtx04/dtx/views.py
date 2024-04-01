@@ -119,10 +119,106 @@ def Login_Medi(request):
         print(f"Error2: {e}")
         return render(request, 'dtx/Login_Medi.html')
 
+
+# 회원가입
+@method_decorator(csrf_exempt,name='dispatch')
+def Signup(request):
+    try:
+        if request.method == 'POST':
+            business_num = request.POST.get('business_num')
+            business_file = request.POST.get('business_file')
+            file_pass = request.POST.get('file_pass')
+            chkAll = request.POST.get('chkAll')
+            chk1 = request.POST.get('chk1')
+            chk2 = request.POST.get('chk2')
+            chk3 = request.POST.get('chk3')
+            chk4 = request.POST.get('chk4')
+            chk5 = request.POST.get('chk5')
+            username = request.POST.get('username')
+            pw = request.POST.get('pw')
+            name = request.POST.get('name')
+            inst = request.POST.get('inst')
+            phone = request.POST.get('phone')
+            mail = request.POST.get('mail')
+
+
+            print('business_num: ', business_num)
+            print('business_file: ', business_file)
+            print('file_pass: ', file_pass)
+            print('chkAll: ', chkAll)
+            print('chk1: ', chk1)
+            print('chk2: ', chk2)
+            print('chk3: ', chk3)
+            print('chk4: ', chk4)
+            print('chk5: ', chk5)
+            print('username: ', username)
+            print('pw: ', pw)
+            print('name: ', name)
+            print('inst: ', inst)
+            print('phone: ', phone)
+            print('mail: ', mail)
+            
+            print('API Post 요청을 통해 전달된 데이터', request.body.decode())
+
+            res_data = {}
+            login_info = {'business_num': business_num, 'business_file':business_file, 'file_pass':file_pass,
+                          'chkAll': chkAll, 'chk1':chk1, 'chk2':chk2, 'chk3':chk3, 'chk4':chk4, 'chk5':chk5, 
+                          'username': username, 'pw':pw, 'name':name, 'inst':inst, 'phone':phone, 'mail':mail}
+            
+            print('login_info: ', login_info) 
+            
+            api_url = 'http://127.0.0.1:19075/dtx/Signup'
+            
+            retry_strategy = Retry(
+                total=5,
+                backoff_factor=1,
+                status_forcelist=[500, 502, 503, 504],
+                connect=5
+            )
+            adapter = HTTPAdapter(max_retries=retry_strategy)
+            session = Session() 
+            session.mount('http://', adapter)
+            session.mount('https://', adapter)
+            
+            try:
+                response = session.post(api_url, json=login_info)
+                response.raise_for_status()
+                response_data = response.json()
+                print("response_data(47): ", response_data)
+                print(response_data['message'])
+                # 성공적인 응답 처리
+            except requests.exceptions.RequestException as e:
+                print(f"Error1: {e}")
+                # 실패한 경우 예외 처리
+                
+            res_data = {}
+            if response_data['message'] =='success':
+                print("dtx04_view: success")
+                return render(request, 'dtx/login.html')
+            if response_data['message'] =='fail1':
+                res_data['error'] = "아이디를 확인하세요"
+                return render(request, 'dtx/Signup.html', context=res_data)
+            if response_data['message'] =='fail2':
+                res_data['error'] = "비밀번호를 확인하세요"
+                return render(request, 'dtx/Signup.html', context=res_data)
+            if response_data['message'] =='fail3':
+                res_data['error'] = "휴대폰 번호를 확인하세요"
+                return render(request, 'dtx/Signup.html', context=res_data)
+            if response_data['message'] =='fail4':
+                res_data['error'] = "약관 동의를 확인하세요"
+                return render(request, 'dtx/Signup.html', context=res_data)
+        else:
+            print("세번째else")
+            # GET 요청에 대한 응답
+            return render(request, 'dtx/Signup.html')
+    except Exception as e:
+        print(f"Error2: {e}")
+        return render(request, 'dtx/Signup.html')
+    
     
 
 #0515 페이지 연결
-#0518 get/post 작성
+#0518 get/post 작성 
 def Counselor_CBT(request):
     counsel = {
         "con":[
